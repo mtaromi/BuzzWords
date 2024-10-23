@@ -5,7 +5,7 @@ import pathlib
 
 from pygame import mixer
 
-mixer.init()
+# mixer.init()
 
 
 # CSS READING
@@ -155,10 +155,10 @@ def say_word(audio_file):
 
     # text_to_speech(text=word, language="en")
 
-    # audio_file = open("xxx.mp3", "rb").read()
-    # st.audio(audio_file, format="audio/mp3")
-    mixer.music.load(audio_file)
-    mixer.music.play()
+    audio = open(audio_file, "rb").read()
+    st.audio(audio, format="audio/mp3")
+    # mixer.music.load(audio_file)
+    # mixer.music.play()
 
 
 
