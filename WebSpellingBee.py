@@ -248,7 +248,7 @@ def reset():
 # THE UI
 
 
-st.html(f'<p class="title"> BuzzWords </p>')
+st.html(f'<p> BuzzWords </p>')
 
 
 
