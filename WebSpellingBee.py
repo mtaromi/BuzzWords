@@ -248,7 +248,7 @@ def reset():
 # THE UI
 
 
-st.html(f'<p> BuzzWords </p>')
+st.html(f'<p class="title"> BuzzWords </p>')
 
 
 
@@ -291,7 +291,8 @@ with col1:
     attempt_button = st.button("Check Spelling", on_click=check_spelling, disabled=st.session_state.check_but_disabled, use_container_width=True)
 
 with col2:
-    audio_button = st.button("Play word", on_click=audio_button_clicked, disabled=st.session_state.play_but_disabled, use_container_width=True)
+    audio_button = st.button("Play word", on_click=audio_button_clicked, disabled=st.session_state.play_but_disabled, use_container_width=True, key="invisible_button")
+    st.audio("xxx.mp3", format="audio/mp3", autoplay=True)
     defs_button = st.button("Play definition", on_click=defs_button_clicked, disabled=st.session_state.def_but_disabled, use_container_width=True)
 
 
