@@ -342,6 +342,7 @@ if not st.session_state.audio_file ==  '':
     print(f"Duration: {duration:.2f} seconds")
 
     st.audio(audio, format="audio/mp3", autoplay=True)
+    st.html('<div class="cover"> &nbsp; </div>')
 
     time.sleep(duration)
     st.session_state.audio_file = ''
