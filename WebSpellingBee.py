@@ -156,7 +156,7 @@ def say_word(audio_file):
     # text_to_speech(text=word, language="en")
 
     audio = open(audio_file, "rb").read()
-    st.audio(audio, format="audio/mp3")
+    st.audio(audio, format="audio/mp3", autoplay=True)
     # mixer.music.load(audio_file)
     # mixer.music.play()
 
