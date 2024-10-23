@@ -2,8 +2,11 @@
     color: #000
 }
 
-.st-key-invisible_button button {
-    color: #000
+.st-key-play_button button {
+    border-color: #19A62A;
+    position: relative;
+    top: -70px;
+    z-index: 1;
 }
 
 .alignright {

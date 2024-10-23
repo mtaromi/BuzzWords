@@ -1,3 +1,4 @@
 streamlit==1.39.0
 pyttsx3==2.90
 pygame==2.6.1
+pydub==0.25.1

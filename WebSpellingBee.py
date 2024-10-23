@@ -2,11 +2,18 @@ import streamlit as st
 import random
 import threading
 import pathlib
+import time
 
 from pygame import mixer
 
 # mixer.init()
 
+from pydub import AudioSegment
+
+def get_duration_pydub(file_path):
+   audio_file = AudioSegment.from_file(file_path)
+   duration = audio_file.duration_seconds
+   return duration
 
 # CSS READING
 
@@ -98,6 +105,8 @@ if 'reset_but_disabled' not in st.session_state:
 if 'difficulty_level' not in st.session_state:
     st.session_state.difficulty_level = 2
 
+if 'audio_file' not in st.session_state:
+    st.session_state.audio_file = ''
 
 # MAKING SURE BUTTONS CAN'T BE CLICKED AT THE SAME TIME
 
@@ -155,10 +164,11 @@ def say_word(audio_file):
 
     # text_to_speech(text=word, language="en")
 
-    audio = open(audio_file, "rb").read()
-    st.audio(audio, format="audio/mp3", autoplay=True)
+    # audio = open(audio_file, "rb").read()
+    # st.audio(audio, format="audio/mp3", autoplay=True)
     # mixer.music.load(audio_file)
     # mixer.music.play()
+    st.session_state.audio_file = audio_file
 
 
 
@@ -291,8 +301,8 @@ with col1:
     attempt_button = st.button("Check Spelling", on_click=check_spelling, disabled=st.session_state.check_but_disabled, use_container_width=True)
 
 with col2:
-    audio_button = st.button("Play word", on_click=audio_button_clicked, disabled=st.session_state.play_but_disabled, use_container_width=True, key="invisible_button")
-    st.audio("xxx.mp3", format="audio/mp3", autoplay=True)
+    # st.audio("xxx.mp3", format="audio/mp3", autoplay=True)
+    audio_button = st.button("Play word", on_click=audio_button_clicked, disabled=st.session_state.play_but_disabled, use_container_width=True)
     defs_button = st.button("Play definition", on_click=defs_button_clicked, disabled=st.session_state.def_but_disabled, use_container_width=True)
 
 
@@ -324,5 +334,20 @@ with col_r:
 if st.session_state.hearts_counter == 0:
     disable_all_but()
     disabled=st.session_state.reset_but_disabled = False
+
+if not st.session_state.audio_file ==  '':
+    audio = open(st.session_state.audio_file, "rb").read()
+    
+    duration = get_duration_pydub(st.session_state.audio_file)
+    print(f"Duration: {duration:.2f} seconds")
+
+    st.audio(audio, format="audio/mp3", autoplay=True)
+
+    time.sleep(duration)
+    st.session_state.audio_file = ''
+    st.rerun()
+
+
+
 
 
